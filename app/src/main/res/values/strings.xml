@@ -1,0 +1,12 @@
+<resources>
+    <string name="view1" translatable="false">请输入要转换的温度</string>
+    <string name="view_2" translatable="false">结果为：</string>
+    <string name="app_1">Happy Birthday</string>
+    <string name="btn_1" translatable="false">转换温度</string>
+    <string name="teamA" translatable="false">Team  A</string>
+    <string name="score" translatable="false">0</string>
+    <string name="score_1" translatable="false">+1</string>
+    <string name="score_2" translatable="false">+2</string>
+    <string name="score_3" translatable="false">+3</string>
+    <string name="reset" translatable="false">reset</string>
+</resources>

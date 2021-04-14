@@ -4,9 +4,16 @@
     <string name="app_1">Happy Birthday</string>
     <string name="btn_1" translatable="false">转换温度</string>
     <string name="teamA" translatable="false">Team  A</string>
+    <string name="teamB" translatable="false">Team  B</string>
     <string name="score" translatable="false">0</string>
     <string name="score_1" translatable="false">+1</string>
     <string name="score_2" translatable="false">+2</string>
     <string name="score_3" translatable="false">+3</string>
     <string name="reset" translatable="false">reset</string>
+    <string name="tip" translatable="false">请输入要转换金额</string>
+    <string name="dollar" translatable="false">Dollar</string>
+    <string name="Euro" translatable="false">Euro</string>
+    <string name="Han" translatable="false">Han</string>
+    <string name="Jump" translatable="false">jump</string>
+    <string name="jd" translatable="false">jd</string>
 </resources>

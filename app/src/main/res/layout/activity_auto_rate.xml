@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="8dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
@@ -20,13 +21,22 @@
 
         <EditText
 
+            android:id="@+id/money"
+            android:layout_width="match_parent"
+            android:layout_height="103dp"
+            android:layout_gravity="center"
+            android:hint="@string/tip_1"
+            android:inputType="number|text"
+            android:textSize="30sp" />
+
+        <EditText
             android:id="@+id/rate"
             android:layout_width="match_parent"
             android:layout_height="103dp"
             android:layout_gravity="center"
-            android:inputType="number"
-            android:textSize="36sp" />
-
+            android:hint="@string/tip_2"
+            android:inputType="number|text"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/result"
@@ -37,39 +47,16 @@
 
 
         <Button
-            android:id="@+id/euro"
+            android:id="@+id/convert"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Euro"
+            android:layout_height="67dp"
+            android:textSize="25dp"
+            android:text="@string/convert"
             android:onClick="Convert"/>
 
-        <Button
-            android:id="@+id/dollar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/dollar"
-            android:onClick="Convert"/>
 
-        <Button
-            android:id="@+id/han"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Han"
-            android:onClick="Convert"/>
 
-        <Button
-            android:id="@+id/button10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Jump"
-            android:onClick="jump"/>
 
-        <Button
-            android:id="@+id/button11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/jd"
-            android:onClick="JD"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

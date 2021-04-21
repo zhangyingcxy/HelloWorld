@@ -10,12 +10,13 @@
     <string name="score_2" translatable="false">+2</string>
     <string name="score_3" translatable="false">+3</string>
     <string name="reset" translatable="false">reset</string>
-    <string name="tip_1" translatable="false">请输入要转换金额</string>
-    <string name="tip_2" translatable="false">请输入汇率(本币：外币)</string>
+    <string name="tip_1" translatable="false">美元汇率(本币：外币)</string>
+    <string name="tip_2" translatable="false">欧元汇率(本币：外币)</string>
+    <string name="tip_3" translatable="false">韩元汇率(本币：外币)</string>
     <string name="dollar" translatable="false">Dollar</string>
     <string name="Euro" translatable="false">Euro</string>
-    <string name="convert" translatable="false">convert</string>
+    <string name="convert" translatable="false">reset</string>
     <string name="Han" translatable="false">Han</string>
-    <string name="Jump" translatable="false">jump</string>
+    <string name="Jump" translatable="false">reset_rate</string>
     <string name="jd" translatable="false">jd</string>
 </resources>

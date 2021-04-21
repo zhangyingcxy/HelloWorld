@@ -19,4 +19,7 @@
     <string name="Han" translatable="false">Han</string>
     <string name="Jump" translatable="false">reset_rate</string>
     <string name="jd" translatable="false">jd</string>
+    <string name="set" translatable="false">setting</string>
+    <string name="share" translatable="false">share</string>
+
 </resources>

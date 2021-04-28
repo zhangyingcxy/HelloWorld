@@ -1,7 +1,13 @@
 package com.swufe.helloworld;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +20,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RateActivity extends AppCompatActivity {
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class RateActivity extends AppCompatActivity  implements Runnable{
 
     private static final String TAG = "RateActivity";
     TextView result;
@@ -23,7 +37,9 @@ public class RateActivity extends AppCompatActivity {
     Float euro_rate ;
     Float han_rate ;
     Float inpu,convert;
+    Handler handler;
 
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +48,33 @@ public class RateActivity extends AppCompatActivity {
         dollar_rate= 0.1539f;
         euro_rate = 0.1282f;
         han_rate = 172.21f;
+        //读取保存的数据
+        SharedPreferences share = getSharedPreferences("mygrate", Activity.MODE_PRIVATE);
+        dollar_rate = share.getFloat("dollar_key",0.1f);
+        euro_rate = share.getFloat("euro_key",0.2f);
+        han_rate = share.getFloat("han_key",0.3f);
+        Log.i(TAG, "onCreate "+dollar_rate);
+
+        //开启子线程
+        Thread t = new  Thread(this);
+        t.start();
+        handler = new Handler(Looper.myLooper()){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                Log.i(TAG, "handleMessage: 收到的消息是："+msg.what);
+                super.handleMessage(msg);
+                if(msg.what==5){
+                    String str = (String)msg.obj;
+                    Log.i(TAG, "handleMessage: 转换为字符串"+str);
+                    result = (TextView) findViewById(R.id.result);
+                    result.setText("显示消息："+str);
+                }
+
+            }
+
+
+        };
+
     }
 
     @Override
@@ -42,7 +85,10 @@ public class RateActivity extends AppCompatActivity {
             dollar_rate = bundle.getFloat("dollar_key",0.0f);
             euro_rate = bundle.getFloat("euro_key",0.0f);
             han_rate = bundle.getFloat("han_key",0.0f);
+
         }
+
+
 //        switch(requestCode){
 //            case 1:
 //                if(resultCode == RESULT_OK){
@@ -118,7 +164,52 @@ public class RateActivity extends AppCompatActivity {
         else {
 
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void run() {
+//子线程获取网络数据
+        URL url = null;
+        try {
+            url = new URL("http://www.usd-cny.com/bankofchina.htm");
+            HttpURLConnection http  = (HttpURLConnection)url.openConnection();
+            InputStream in = http.getInputStream();
+
+            String html = inputStrem2String(in);
+            Log.i(TAG, "run: 捕获到的数据："+html);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+//        Log.i(TAG, "run: ......");
+//        try {
+//            Thread.sleep(3000);
+//        }catch (InterruptedException e){
+//            e.printStackTrace();
+//        }
+//        //返回主线程消息
+//        Message msg = handler.obtainMessage(5,"hello");
+//        handler.sendMessage(msg);
+
+    }
+//将输入流转换为String
+    private String inputStrem2String(InputStream inputStream) throws IOException{
+        final int bufferSize = 1024;
+        final char[] buffer = new char[bufferSize];
+        final StringBuilder out = new StringBuilder();
+        Reader in = new InputStreamReader(inputStream,"gb2312");
+        while(true){
+            int rsz = in.read(buffer,0,buffer.length);
+            if(rsz<0){
+                break;
+            }
+            out.append(buffer,0,rsz);
+        }
+
+        return out.toString();
     }
 }

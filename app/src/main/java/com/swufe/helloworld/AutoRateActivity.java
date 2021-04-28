@@ -1,6 +1,8 @@
 package com.swufe.helloworld;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +38,7 @@ public class AutoRateActivity extends AppCompatActivity {
         et_euro.setText(String.valueOf(com_euro));
         et_han.setText(String.valueOf(com_han));
 
+
         Log.i(TAG, "onCreate: AutoRateActivity com_dollor="+com_dollor);
         Log.i(TAG, "onCreate: AutoRateActivity com_euro="+com_euro);
         Log.i(TAG, "onCreate: AutoRateActivity com_han="+com_han);
@@ -52,6 +55,15 @@ public class AutoRateActivity extends AppCompatActivity {
         com_dollor = Float.parseFloat(dollar);
         com_euro = Float.parseFloat(euro);
         com_han = Float.parseFloat(han);
+
+        SharedPreferences share = getSharedPreferences("mygrate", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = share.edit();
+        editor.putFloat("dollar_key",com_dollor);
+        editor.putFloat("euro_key",com_euro);
+        editor.putFloat("han_key",com_han);
+        editor.apply();
+
+
 
         if (dollar != null && dollar.length()>0 && euro != null && euro.length()>0 && han != null && han.length()>0){
                 Intent intent = new Intent();

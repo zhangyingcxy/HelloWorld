@@ -20,13 +20,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class RateActivity extends AppCompatActivity  implements Runnable{
 
@@ -62,18 +64,29 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
             @Override
             public void handleMessage(@NonNull Message msg) {
                 Log.i(TAG, "handleMessage: 收到的消息是："+msg.what);
-                super.handleMessage(msg);
+
                 if(msg.what==5){
-                    String str = (String)msg.obj;
-                    Log.i(TAG, "handleMessage: 转换为字符串"+str);
-                    result = (TextView) findViewById(R.id.result);
-                    result.setText("显示消息："+str);
+                    Log.i(TAG, "handleMessage: 收到的消息是："+msg.what);
+                    Bundle bdl = (Bundle) msg.obj;
+                    dollar_rate = bdl.getFloat("dollar_key");
+                    euro_rate = bdl.getFloat("euro_key");
+                    han_rate = bdl.getFloat("han_key");
+
+                    Log.i(TAG, "handleMessage: dollarRate:" + dollar_rate);
+                    Log.i(TAG, "handleMessage: euroRate:" + euro_rate);
+                    Log.i(TAG, "handleMessage: wonRate:" + han_rate);
+                    Toast.makeText(RateActivity.this, "汇率已更新", Toast.LENGTH_SHORT).show();
                 }
-
+                super.handleMessage(msg);
             }
-
-
         };
+
+        SharedPreferences.Editor editor = share.edit();
+        editor.putFloat("dollar_rate",dollar_rate);
+        editor.putFloat("euro_rate",euro_rate);
+        editor.putFloat("won_rate",han_rate);
+        editor.apply();
+
 
     }
 
@@ -170,20 +183,76 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
     @Override
     public void run() {
 //子线程获取网络数据
-        URL url = null;
+//        URL url = null;
+//        try {
+//            url = new URL("http://www.usd-cny.com/bankofchina.htm");
+//            HttpURLConnection http  = (HttpURLConnection)url.openConnection();
+//            InputStream in = http.getInputStream();
+//
+//            String html = inputStrem2String(in);
+//            Log.i(TAG, "run: 捕获到的数据："+html);
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
+        Bundle bundle = new Bundle();
         try {
-            url = new URL("http://www.usd-cny.com/bankofchina.htm");
-            HttpURLConnection http  = (HttpURLConnection)url.openConnection();
-            InputStream in = http.getInputStream();
+            Document doc = Jsoup.connect("http://www.usd-cny.com/bankofchina.htm").get();
+            Log.i(TAG, "run: " + doc.title());
+            Element tables = doc.getElementsByTag("table").first();
+            Elements tds = tables.getElementsByTag("td");
 
-            String html = inputStrem2String(in);
-            Log.i(TAG, "run: 捕获到的数据："+html);
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e){
+            //获取eds中的数据
+            for(int i=0;i<tds.size();i+=6){
+                Element td1 = tds.get(i);
+                Element td2 = tds.get(i+5);
+                String str1 = td1.text();
+                String val = td2.text();
+                Log.i(TAG, "run: " + str1 + "==>" + val);
+                float v = 100f / Float.parseFloat(val);
+                if("美元".equals(str1)){
+                    bundle.putFloat("dollar_key", v);
+                }else if("欧元".equals(str1)){
+                    bundle.putFloat("euro_key", v);
+                }else if("韩元".equals(str1)){
+                    bundle.putFloat("han_key", v);
+                }
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Message msg = handler.obtainMessage(5);
+        msg.obj = bundle;
+        handler.sendMessage(msg);
+
+        //通过select选择
+//            Element ele = doc.select("body > section > div > div > article > table > tbody > tr:nth-child(14) > td:nth-child(6)").first();
+//            Log.i(TAG, "run: 韩元="+ele.text());
+//            for (Element td :tds){
+//                Log.i(TAG, "run: "+td);
+//
+//            }
+            //取类
+//            Elements cls = doc.getElementsByClass("br");
+//            for(Element c:cls){
+//                Log.i(TAG, "run: c="+c);;
+//                Log.i(TAG, "run: c.html"+c.html());
+//                Log.i(TAG, "run: c.text"+c.text());
+//            }
+
+            //按行取数
+//             Elements trs = tables.g("tr");
+//            for(org.jsoup.nodes.Element tr: trs){
+//                Elements tds = tr.getElementByTag("td");
+//                String str = tds.get(0).text();
+//                String val = tds.get(5).text();
+//                Log.i(TAG, "run: "+str+"->"+val);
+//            }
+
+
 
 //        Log.i(TAG, "run: ......");
 //        try {
@@ -194,8 +263,8 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
 //        //返回主线程消息
 //        Message msg = handler.obtainMessage(5,"hello");
 //        handler.sendMessage(msg);
+        }
 
-    }
 //将输入流转换为String
     private String inputStrem2String(InputStream inputStream) throws IOException{
         final int bufferSize = 1024;

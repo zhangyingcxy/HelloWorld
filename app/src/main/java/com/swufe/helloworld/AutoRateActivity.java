@@ -55,7 +55,7 @@ public class AutoRateActivity extends AppCompatActivity {
         com_dollor = Float.parseFloat(dollar);
         com_euro = Float.parseFloat(euro);
         com_han = Float.parseFloat(han);
-
+       //  将新设置的汇率写到配置文件里
         SharedPreferences share = getSharedPreferences("mygrate", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = share.edit();
         editor.putFloat("dollar_key",com_dollor);

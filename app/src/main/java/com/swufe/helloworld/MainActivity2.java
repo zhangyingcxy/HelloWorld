@@ -1,9 +1,11 @@
 package com.swufe.helloworld;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity2 extends AppCompatActivity {
@@ -54,5 +56,26 @@ public class MainActivity2 extends AppCompatActivity {
     public void reset(View v){
         current1.setText(String.valueOf(0));
         current2.setText(String.valueOf(0));
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        String scoreA =current1.toString();
+        String scoreB = current2.toString();
+
+        outState.putString("scoreA",scoreA);
+        outState.putString("scoreB",scoreB);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String scoreA = savedInstanceState.getString("scoreA");
+        String scoreB = savedInstanceState.getString("scoreB");
+
+        current1.setText(scoreA);
+        current2.setText(scoreB);
     }
 }

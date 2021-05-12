@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.jsoup.Jsoup;
@@ -29,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.time.LocalDate;
 
 public class RateActivity extends AppCompatActivity  implements Runnable{
 
@@ -40,7 +43,9 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
     Float han_rate ;
     Float inpu,convert;
     Handler handler;
+    String update = "";
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +60,22 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
         dollar_rate = share.getFloat("dollar_key",0.1f);
         euro_rate = share.getFloat("euro_key",0.2f);
         han_rate = share.getFloat("han_key",0.3f);
+        update = share.getString("uodate",update);
         Log.i(TAG, "onCreate "+dollar_rate);
+        Log.i(TAG, "onCreate:获得日期 "+update);
 
         //开启子线程
-        Thread t = new  Thread(this);
-        t.start();
+
+        LocalDate today = LocalDate.now();
+        Log.i(TAG, "onCreate: "+"需要更新");
+        if(!today.toString().equals(update)){
+            Thread t = new  Thread(this);
+            t.start();
+        }
+        else {
+            Log.i(TAG, "onCreate: "+"不需要更新");
+        }
+
         handler = new Handler(Looper.myLooper()){
             @Override
             public void handleMessage(@NonNull Message msg) {
@@ -85,6 +101,7 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
         editor.putFloat("dollar_rate",dollar_rate);
         editor.putFloat("euro_rate",euro_rate);
         editor.putFloat("won_rate",han_rate);
+        editor.putString("update",today.toString());
         editor.apply();
 
 
@@ -123,7 +140,7 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
 
      public void Convert(View v){
         result = (TextView) findViewById(R.id.result);
-        money = (EditText) findViewById(R.id.rate);
+        money = (EditText) findViewById(R.id.mylist);
         String inp = money.getText().toString();
         if (inp != null && inp.length()>0){
             inpu = Float.parseFloat(inp);
@@ -204,7 +221,7 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
             Element tables = doc.getElementsByTag("table").first();
             Elements tds = tables.getElementsByTag("td");
 
-            //获取eds中的数据
+            //获取tds中的数据
             for(int i=0;i<tds.size();i+=6){
                 Element td1 = tds.get(i);
                 Element td2 = tds.get(i+5);
@@ -223,7 +240,7 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+//返回主线程消息
         Message msg = handler.obtainMessage(5);
         msg.obj = bundle;
         handler.sendMessage(msg);
@@ -260,9 +277,7 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
 //        }catch (InterruptedException e){
 //            e.printStackTrace();
 //        }
-//        //返回主线程消息
-//        Message msg = handler.obtainMessage(5,"hello");
-//        handler.sendMessage(msg);
+
         }
 
 //将输入流转换为String
@@ -280,5 +295,11 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
         }
 
         return out.toString();
+    }
+
+    //跨Activity使用代码
+    public  void sendHandler(Handler h){
+        this.handler = h;
+
     }
 }

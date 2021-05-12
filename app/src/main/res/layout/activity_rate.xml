@@ -20,7 +20,7 @@
 
         <EditText
 
-            android:id="@+id/rate"
+            android:id="@+id/mylist"
             android:layout_width="match_parent"
             android:layout_height="103dp"
             android:layout_gravity="center"

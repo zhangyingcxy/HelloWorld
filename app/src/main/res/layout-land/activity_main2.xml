@@ -13,8 +13,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="140dp"
+
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="16dp">
@@ -23,8 +22,8 @@
             android:id="@+id/linearLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginRight="8dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -33,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
+
                 android:text="@string/teamA"
                 android:textSize="36sp" />
 
@@ -42,48 +41,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
                 android:gravity="center"
                 android:text="@string/score"
-                android:textSize="75sp" />
+                android:textSize="45sp" />
 
-            <Button
-                android:id="@+id/score_3"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:onClick="bnt_3"
-                android:text="@string/score_3"
-                android:textSize="30sp" />
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/score_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:onClick="bnt_2"
-                android:text="@string/score_2"
-                android:textSize="30sp" />
+                <Button
+                    android:id="@+id/score_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="bnt_3"
+                    android:text="@string/score_3"
+                    android:textSize="30sp" />
 
-            <Button
-                android:id="@+id/score_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:onClick="bnt_1"
-                android:text="@string/score_1"
-                android:textSize="30sp" />
+                <Button
+                    android:id="@+id/score_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="bnt_2"
+                    android:text="@string/score_2"
+                    android:textSize="30sp" />
+
+                <Button
+                    android:id="@+id/score_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="bnt_1"
+                    android:text="@string/score_1"
+                    android:textSize="30sp" />
+            </LinearLayout>
 
         </LinearLayout>
-
 
 
         <LinearLayout
             android:id="@+id/linearLayout_b"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="8dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -92,7 +95,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
                 android:text="@string/teamB"
                 android:textSize="36sp" />
 
@@ -101,54 +103,59 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
                 android:gravity="center"
                 android:text="@string/score"
-                android:textSize="75sp" />
+                android:textSize="45sp" />
 
-            <Button
-                android:id="@+id/score_3b"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:onClick="bnt_3"
-                android:text="@string/score_3"
-                android:textSize="30sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/score_2b"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:onClick="bnt_2"
-                android:text="@string/score_2"
-                android:textSize="30sp" />
+                <Button
+                    android:id="@+id/score_1b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="bnt_1"
+                    android:text="@string/score_1"
+                    android:textSize="30sp" />
 
-            <Button
-                android:id="@+id/score_1b"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:onClick="bnt_1"
-                android:text="@string/score_1"
-                android:textSize="30sp" />
+                <Button
+                    android:id="@+id/score_2b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="bnt_2"
+                    android:text="@string/score_2"
+                    android:textSize="30sp" />
+                <Button
+                    android:id="@+id/score_3b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="bnt_3"
+                    android:text="@string/score_3"
+                    android:textSize="30sp" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/reset"
-        android:layout_width="109dp"
-        android:layout_height="45dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
         android:layout_marginStart="159dp"
+        android:layout_marginTop="150dp"
         android:layout_marginEnd="159dp"
-        android:layout_marginBottom="16dp"
         android:onClick="reset"
         android:text="@string/reset"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="0.6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,8 +31,8 @@ public class MyListActivity extends ListActivity  implements Runnable{
         super.onCreate(savedInstanceState);
 
         //开启子线程
-        RateActivity r = new RateActivity();
-        r.sendHandler(handler);
+//        RateActivity r = new RateActivity();
+//        r.sendHandler(handler);
         Thread t = new  Thread(this);
         t.start();
 

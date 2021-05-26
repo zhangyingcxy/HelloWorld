@@ -51,7 +51,7 @@ public class RateCalculate extends AppCompatActivity implements TextWatcher {
     private void MyTextChange() {
         if (rmb != null) {
             inp = Float.parseFloat(String.valueOf(rmb.getText()));
-            float output = rate * inp;
+            float output = rate * (100/inp);
             re = String.valueOf(output);
         } else {
             re = "Please  Input";

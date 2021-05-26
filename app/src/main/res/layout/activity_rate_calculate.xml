@@ -30,7 +30,7 @@
             android:layout_marginBottom="10dp"
             android:gravity="left"
             android:hint="input   RMB"
-            android:inputType="numberSigned"
+            android:inputType="numberSigned|numberDecimal"
             android:textSize="25sp"></EditText>
         <TextView
             android:id="@+id/re"

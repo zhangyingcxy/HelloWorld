@@ -22,5 +22,6 @@
     <string name="set" translatable="false">setting</string>
     <string name="share" translatable="false">share</string>
     <string name="currency" translatable="false">Currency</string>
+    <string name="naData">No Data</string>
 
 </resources>

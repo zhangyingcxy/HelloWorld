@@ -43,7 +43,7 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
     Float han_rate ;
     Float inpu,convert;
     Handler handler;
-    String update = "";
+    String update = " ";
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("HandlerLeak")
@@ -65,7 +65,6 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
         Log.i(TAG, "onCreate:获得日期 "+update);
 
         //开启子线程
-
         LocalDate today = LocalDate.now();
         Log.i(TAG, "onCreate: "+"需要更新");
         if(!today.toString().equals(update)){
@@ -270,14 +269,6 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
 //            }
 
 
-
-//        Log.i(TAG, "run: ......");
-//        try {
-//            Thread.sleep(3000);
-//        }catch (InterruptedException e){
-//            e.printStackTrace();
-//        }
-
         }
 
 //将输入流转换为String
@@ -297,9 +288,4 @@ public class RateActivity extends AppCompatActivity  implements Runnable{
         return out.toString();
     }
 
-    //跨Activity使用代码
-    public  void sendHandler(Handler h){
-        this.handler = h;
-
-    }
 }

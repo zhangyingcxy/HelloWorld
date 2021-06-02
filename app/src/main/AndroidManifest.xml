@@ -13,20 +13,21 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".GridViewActivity"></activity>
         <activity android:name=".MyListActivity2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".RateCalculate" />
-        <activity android:name=".RateListActivity" /> <!-- <activity android:name=".RateActivity" /> -->
-        <!-- <activity android:name=".MyListActivity"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
+        <activity android:name=".MyListActivity" /> <!-- <activity android:name=".RateActivity" /> -->
+         <activity android:name=".RateListActivity">
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+         </activity>
         <activity android:name=".AutoRateActivity" />
     </application>
 

@@ -63,8 +63,6 @@ public class AutoRateActivity extends AppCompatActivity {
         editor.putFloat("han_key",com_han);
         editor.apply();
 
-
-
         if (dollar != null && dollar.length()>0 && euro != null && euro.length()>0 && han != null && han.length()>0){
                 Intent intent = new Intent();
                 //方法一

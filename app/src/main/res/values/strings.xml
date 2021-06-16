@@ -22,6 +22,26 @@
     <string name="set" translatable="false">setting</string>
     <string name="share" translatable="false">share</string>
     <string name="currency" translatable="false">Currency</string>
-    <string name="naData">No Data</string>
+    <string name="naData" translatable="false">No Data</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+
+    <string name="settings_title" translatable="false">配置页面</string>
+
+    <!-- 控件标签 -->
+    <string name="set_switch1_label" translatable="false">开关项</string>
+    <string name="set_checkbox1_label" translatable="false">复选项</string>
+    <string name="set_list_label" translatable="false">列表项</string>
+    <string name="set_text1_label" translatable="false">选项1</string>
+    <string name="set_text2_label" translatable="false">选项2</string>
+    <string name="set_group1_label" translatable="false">分组1</string>
+    <string name="set_group2_label" translatable="false">分组2</string>
+
+    <!-- 控件ID -->
+    <string name="set_switch1_key" translatable="false">set_switch1</string>
+    <string name="set_checkbox1_key" translatable="false">set_checkbox1</string>
+    <string name="set_list_key" translatable="false">set_list</string>
+    <string name="set_text1_key" translatable="false">set_text1</string>
+    <string name="set_text2_key" translatable="false">set_text2</string>
 
 </resources>

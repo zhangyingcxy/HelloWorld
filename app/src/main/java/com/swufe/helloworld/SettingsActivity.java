@@ -16,10 +16,12 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
     }
     public static class MyPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
+
             Preference setText1 = findPreference(getString(R.string.set_text1_key));
             bindPreferenceSummaryToValue(setText1);
 
@@ -29,13 +31,13 @@ public class SettingsActivity extends AppCompatActivity {
             //设置显示列表值，会替换掉原来的summary显示
             //bindPreferenceSummaryToValue(findPreference(getString(R.string.set_list_key)));
         }
-
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
             preference.setSummary(stringValue);
             return true;
         }
+
         private void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
@@ -43,8 +45,4 @@ public class SettingsActivity extends AppCompatActivity {
             onPreferenceChange(preference, preferenceString);
         }
     }
-    SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-    boolean setSwitch = sharedPrefs.getBoolean(getString(R.string.set_switch1_key),false);
-    String setVal2 = sharedPrefs.getString(getString(R.string.set_text2_key),"");
-    int setVal1 = Integer.parseInt(sharedPrefs.getString(getString(R.string.set_text1_key),"0"));
 }

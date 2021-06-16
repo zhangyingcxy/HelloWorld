@@ -43,5 +43,9 @@
     <string name="set_list_key" translatable="false">set_list</string>
     <string name="set_text1_key" translatable="false">set_text1</string>
     <string name="set_text2_key" translatable="false">set_text2</string>
-
+<!--    vote投票小案例-->
+    <string name="hello_world" translatable="false">欢迎使用！</string>
+    <string name="lab_approve" translatable="false">赞成</string>
+    <string name="lab_object" translatable="false">反对</string>
+    <string name="lab_abstain" translatable="false">弃权</string>
 </resources>
